@@ -1,0 +1,9 @@
+joblib
+fastapi
+tensorflow
+numpy
+matplotlib
+opencv-python
+sqlalchemy
+pydantic
+pytest

@@ -1,35 +1,35 @@
-# Facial Emotion Detection
+# Détection des Émotions Faciales
 
-A machine learning-based application that detects and classifies human emotions from facial images using deep learning and OpenCV. This project combines computer vision techniques with a FastAPI backend to provide real-time emotion prediction and historical tracking.
+Une application basée sur l'apprentissage automatique qui détecte et classifie les émotions humaines à partir d'images faciales en utilisant le deep learning et OpenCV. Ce projet combine des techniques de vision par ordinateur avec un backend FastAPI pour fournir une prédiction d'émotion en temps réel et un suivi historique.
 
-## 🎯 Features
+## 🎯 Caractéristiques
 
-- **Real-time Emotion Detection**: Analyzes facial images and predicts one of 7 emotions
-- **Face Detection**: Uses Haar Cascade classifiers for robust face detection
-- **REST API**: FastAPI-based endpoints for easy integration
-- **Prediction History**: Store and retrieve prediction records with database persistence
-- **Multiple Emotion Categories**: Detects 7 emotions:
-  - Angry
-  - Disgusted
-  - Fearful
-  - Happy
-  - Neutral
-  - Sad
-  - Surprised
+- **Détection d'Émotion en Temps Réel**: Analyse les images faciales et prédit l'une des 7 émotions
+- **Détection de Visages**: Utilise les classificateurs Haar Cascade pour une détection robuste des visages
+- **API REST**: Points de terminaison basés sur FastAPI pour une intégration facile
+- **Historique des Prédictions**: Stocker et récupérer les dossiers de prédiction avec persistance de la base de données
+- **Catégories d'Émotions Multiples**: Détecte 7 émotions:
+  - Colère
+  - Dégoût
+  - Peur
+  - Joie
+  - Neutre
+  - Tristesse
+  - Surprise
 
-## 📁 Project Structure
+## 📁 Structure du Projet
 
 ```
 Facial-Emotion-Detection/
-├── app/                              # Main application code
-│   ├── main.py                       # FastAPI application and endpoints
-│   ├── detect_and_predict.py        # Emotion detection and prediction logic
-│   ├── models.py                     # SQLAlchemy database models
-│   ├── schemas.py                    # Pydantic validation schemas
-│   ├── database.py                   # Database configuration
+├── app/                              # Code principal de l'application
+│   ├── main.py                       # Application FastAPI et points de terminaison
+│   ├── detect_and_predict.py        # Logique de détection et prédiction d'émotion
+│   ├── models.py                     # Modèles de base de données SQLAlchemy
+│   ├── schemas.py                    # Schémas de validation Pydantic
+│   ├── database.py                   # Configuration de la base de données
 │   └── __pycache__/
-├── data/                             # Training and test datasets
-│   ├── train/                        # Training images organized by emotion
+├── data/                             # Ensembles de données d'entraînement et de test
+│   ├── train/                        # Images d'entraînement organisées par émotion
 │   │   ├── angry/
 │   │   ├── disgusted/
 │   │   ├── fearful/
@@ -37,24 +37,24 @@ Facial-Emotion-Detection/
 │   │   ├── neutral/
 │   │   ├── sad/
 │   │   └── surprised/
-│   └── test/                         # Test images organized by emotion
-├── haarscad_Propgram/                # Haar Cascade classifier files
+│   └── test/                         # Images de test organisées par émotion
+├── haarscad_Propgram/                # Fichiers du classificateur Haar Cascade
 │   └── haarcascade_frontalface_default 2.xml
-├── My_Model/                         # Trained emotion detection model
+├── My_Model/                         # Modèle de détection d'émotion entraîné
 │   └── emotion_detection_model.pkl
-├── test_u/                           # Unit tests
+├── test_u/                           # Tests unitaires
 │   └── test_project.py
-├── EDA.ipynb                         # Exploratory Data Analysis notebook
-├── images_tester/                    # Sample images for testing
+├── EDA.ipynb                         # Cahier d'Analyse Exploratoire des Données
+├── images_tester/                    # Exemples d'images pour les tests
 └── README.md
 ```
 
-## 🚀 Getting Started
+## 🚀 Démarrage Rapide
 
-### Prerequisites
+### Prérequis
 
 - Python 3.8+
-- pip or conda package manager
+- Gestionnaire de paquets pip ou conda
 - OpenCV
 - TensorFlow/Keras
 - FastAPI
@@ -63,67 +63,76 @@ Facial-Emotion-Detection/
 
 ### Installation
 
-1. Clone the repository:
+1. Cloner le référentiel:
 ```bash
 git clone https://github.com/Lhcenzetta/Facial-Emotion-Detection.git
 cd Facial-Emotion-Detection
 ```
 
-2. Create and activate a virtual environment:
+2. Créer et activer un environnement virtuel:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # Sous Windows: venv\Scripts\activate
 ```
 
-3. Install required dependencies:
+3. Installer les dépendances requises:
 ```bash
 pip install -r requirements.txt
 ```
 
-### Running the Application
+4. Télécharger les données:
 
-Start the FastAPI server:
+Les données d'entraînement et de test peuvent être téléchargées depuis Kaggle:
+```
+https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer/data
+```
+
+Après téléchargement, extrayez les fichiers dans le dossier `data/` du projet.
+
+### Exécution de l'Application
+
+Démarrez le serveur FastAPI:
 ```bash
 uvicorn app.main:app --reload
 ```
 
-The API will be available at `http://localhost:8000`
+L'API sera disponible à `http://localhost:8000`
 
-API documentation available at:
+La documentation de l'API est disponible à:
 - **Swagger UI**: `http://localhost:8000/docs`
 - **ReDoc**: `http://localhost:8000/redoc`
 
-## 📡 API Endpoints
+## 📡 Points de Terminaison API
 
-### 1. Predict Emotion
+### 1. Prédire une Émotion
 **POST** `/predict_emotion`
 
-Upload an image file to predict the emotion of detected faces.
+Téléchargez un fichier image pour prédire l'émotion des visages détectés.
 
-**Request:**
-- `file`: Image file (multipart form data)
+**Demande:**
+- `file`: Fichier image (données de formulaire multipart)
 
-**Response:**
+**Réponse:**
 ```json
 {
   "id": 1,
-  "emotion": "happy",
+  "emotion": "joie",
   "score": 0.95,
   "create_at_date": "2025-11-14 10:30:45"
 }
 ```
 
-### 2. Get Prediction History
+### 2. Obtenir l'Historique des Prédictions
 **GET** `/history`
 
-Retrieve all stored predictions.
+Récupérez toutes les prédictions stockées.
 
-**Response:**
+**Réponse:**
 ```json
 [
   {
     "id": 1,
-    "emotion": "happy",
+    "emotion": "joie",
     "score": 0.95,
     "create_at_date": "2025-11-14 10:30:45"
   },
@@ -131,82 +140,85 @@ Retrieve all stored predictions.
 ]
 ```
 
-### 3. Get Specific Prediction
+### 3. Obtenir une Prédiction Spécifique
 **GET** `/history/{prediction_id}`
 
-Retrieve a specific prediction by ID.
+Récupérez une prédiction spécifique par ID.
 
-**Response:**
+**Réponse:**
 ```json
 {
   "id": 1,
-  "emotion": "happy",
+  "emotion": "joie",
   "score": 0.95,
   "create_at_date": "2025-11-14 10:30:45"
 }
 ```
 
-## 🤖 How It Works
+## 🤖 Comment ça Marche
 
-1. **Face Detection**: The application uses Haar Cascade Classifier to detect faces in the input image
-2. **Preprocessing**: Detected face regions are converted to grayscale and resized to 48x48 pixels
-3. **Emotion Prediction**: The preprocessed face is fed into a trained deep learning model (stored as `emotion_detection_model.pkl`)
-4. **Scoring**: The model returns the predicted emotion class and confidence score
-5. **Storage**: Results are stored in a SQLite database for historical tracking
+1. **Détection de Visages**: L'application utilise le Classificateur Haar Cascade pour détecter les visages dans l'image d'entrée
+2. **Prétraitement**: Les régions de visage détectées sont converties en niveaux de gris et redimensionnées à 48x48 pixels
+3. **Prédiction d'Émotion**: Le visage prétraité est introduit dans un modèle de deep learning entraîné (stocké sous le nom `emotion_detection_model.pkl`)
+4. **Notation**: Le modèle renvoie la classe d'émotion prédite et le score de confiance
+5. **Stockage**: Les résultats sont stockés dans une base de données SQLite pour un suivi historique
 
-## 📊 Model Details
+## 📊 Détails du Modèle
 
-- **Model Type**: Pre-trained neural network (saved as joblib pickle file)
-- **Input Size**: 48x48 grayscale images
-- **Output Classes**: 7 emotion categories
-- **Face Detector**: OpenCV Haar Cascade Classifier
+- **Type de Modèle**: Réseau de neurones pré-entraîné (sauvegardé en tant que fichier pickle joblib)
+- **Taille d'Entrée**: Images en niveaux de gris 48x48
+- **Classes de Sortie**: 7 catégories d'émotions
+- **Détecteur de Visages**: Classificateur Haar Cascade OpenCV
 
-## 🧪 Testing
+## 🧪 Tests
 
-Run the test suite:
+Exécutez la suite de tests:
 ```bash
 pytest test_u/test_project.py
 ```
 
-## 📓 Exploratory Data Analysis
+## 📓 Analyse Exploratoire des Données
 
-For detailed analysis of the dataset, see `EDA.ipynb` which includes:
-- Dataset distribution analysis
-- Image preprocessing techniques
-- Model training insights
+Pour une analyse détaillée de l'ensemble de données, consultez `EDA.ipynb` qui comprend:
+- Analyse de la distribution de l'ensemble de données
+- Techniques de prétraitement d'images
+- Aperçus de la formation du modèle
 
-## 🛠️ Technologies Used
+## 🛠️ Technologies Utilisées
 
-- **FastAPI**: Modern web framework for building APIs
-- **TensorFlow/Keras**: Deep learning framework
-- **OpenCV**: Computer vision library
-- **SQLAlchemy**: ORM for database operations
-- **Pydantic**: Data validation and parsing
-- **SQLite**: Database for storing predictions
-- **Joblib**: Model serialization and loading
+- **FastAPI**: Framework web moderne pour construire des API
+- **TensorFlow/Keras**: Framework de deep learning
+- **OpenCV**: Bibliothèque de vision par ordinateur
+- **SQLAlchemy**: ORM pour les opérations de base de données
+- **Pydantic**: Validation et analyse des données
+- **SQLite**: Base de données pour stocker les prédictions
+- **Joblib**: Sérialisation et chargement de modèles
 
-## 📝 Database Schema
+## 📝 Schéma de la Base de Données
 
-### Predictions Table
+### Tableau des Prédictions
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | Integer | Primary key |
-| emotion | String | Predicted emotion class |
-| score | Float | Confidence score (0-1) |
-| create_at_date | String | Timestamp of prediction |
+| Colonne | Type | Description |
+|---------|------|-------------|
+| id | Integer | Clé primaire |
+| emotion | String | Classe d'émotion prédite |
+| score | Float | Score de confiance (0-1) |
+| create_at_date | String | Horodatage de la prédiction |
 
-## 🤝 Contributing
+## 🤝 Contribution
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Les contributions sont bienvenues! N'hésitez pas à soumettre une demande d'extraction.
 
-## 📄 License
+## 📄 Licence
 
-This project is open source and available under the MIT License.
+Ce projet est open source et disponible sous la licence MIT.
 
+## 👨‍💻 Auteur
 
-## 🙏 Acknowledgments
+- **Lhcenzetta** - [Profil GitHub](https://github.com/Lhcenzetta)
 
-- Haar Cascade classifiers from OpenCV
-- Inspiration from emotion recognition research
-- Community contributions and feedback
+## 🙏 Remerciements
+
+- Classificateurs Haar Cascade d'OpenCV
+- Inspiration de la recherche en reconnaissance des émotions
+- Contributions et retours de la communauté
