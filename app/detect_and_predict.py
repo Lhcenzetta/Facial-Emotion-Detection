@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import tensorflow as tf
-
+import joblib
 trainside = tf.keras.utils.image_dataset_from_directory(
                                             "/Users/lait-zet/Desktop/Facial-Emotion-Detection/data/train",
                                              shuffle=True,
@@ -30,8 +30,7 @@ cascPath = '/Users/lait-zet/Desktop/Facial-Emotion-Detection/haarscad_Propgram/h
 
 faceCascade = cv2.CascadeClassifier(cascPath)
 
-predictor_model = tf.keras.models.load_model('/Users/lait-zet/Desktop/Facial-Emotion-Detection/My_Model/emotion_model.h5')
-
+predictor_model = joblib.load('/Users/lait-zet/Desktop/Facial-Emotion-Detection/My_Model/emotion_detection_model.pkl')
 
 
 def predict_emotion(image):
