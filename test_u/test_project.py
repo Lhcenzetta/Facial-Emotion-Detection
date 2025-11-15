@@ -12,4 +12,4 @@ def load_model():
     return model
 
 def test_model_loading(load_model):
-    assert load_model is not None
+    assert load_model != None
